@@ -15,10 +15,10 @@ authors:
 - Jian Wu
 
 # Author notes (optional)
-author_notes:
-- "Equal contribution"
-- "Equal contribution"
-- "Equal contribution"
+# author_notes:
+# - "Equal contribution"
+# - "Equal contribution"
+# - "Equal contribution"
 
 date: "2022-03-01T00:00:00Z"
 doi: "https://doi.org/"
@@ -44,14 +44,14 @@ summary: Colorectal Cancer Diagnosis via Raman Spectra.
 tags: ['medical imaging']
 
 # Display this page in the Featured widget?
-featured: true
+featured: false
 
 # Custom links (uncomment lines below)
 # links:
 # - name: Custom Link
 #   url: http://example.org
 
-url_pdf: ''
+url_pdf: 'https://downloads.spj.sciencemag.org/bmef/aip/9872028.pdf'
 url_code: ''
 url_dataset: ''
 url_poster: ''

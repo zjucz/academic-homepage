@@ -39,7 +39,7 @@ summary: Novel Attention-based Deep learning architecture for COVID-19 diagnose 
 tags: ['medical imaging']
 
 # Display this page in the Featured widget?
-featured: true
+featured: false
 
 # Custom links (uncomment lines below)
 # links:

@@ -26,13 +26,13 @@ interests:
 # Education to show in About widget
 education:
   courses:
-  - course: PhD in Computer Science
+  - course: Doctor of Philosophy in Computer Science
     institution: Zhejiang University (ZJU)
     year: 2019
-  - course: BSc (Hons) in Applied Chemistry
+  - course: Bachelor of Science (honors) in Applied Chemistry
     institution: University of Reading (UoR)
     year: 2018
-  - course: BSc in Applied Chemistry
+  - course: Bachelor of Science in Applied Chemistry
     institution: Nanjing University of Information Science & Technology (NUIST)
     year: 2015
 

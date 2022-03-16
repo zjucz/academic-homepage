@@ -1,27 +1,27 @@
 ---
-title: "Multi-modality fusion learning for the automatic diagnosis of optic neuropathy"
+title: "A Two-Stage Deep Learning Architecture for Radiographic Assessment of Periodontal Bone Loss"
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here 
 # and it will be replaced with their full name and linked to their profile.
 authors:
+- Linhong Jiang
+- Daqian Chen
 - admin
-- Chuanbin Sun
-- Wenzhe Wang
-- Xiangshang Zheng
-- Jian Wu
-- Honghao Gao
+- Haihua Zhu
+- Fudong Zhu
 
 # Author notes (optional)
-author_notes:
-- "Equal contribution"
-- "Equal contribution"
+# author_notes:
+# - "Equal contribution"
+# - "Equal contribution"
+# - "Equal contribution"
 
-date: "2020-06-05T00:00:00Z"
-doi: ""
+date: "2021-12-01T00:00:00Z"
+doi: "https://doi.org/"
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2020-12-30T00:00:00Z"
+publishDate: "2021-12-01T00:00:00Z"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
@@ -30,13 +30,12 @@ publishDate: "2020-12-30T00:00:00Z"
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: PRL
-publication_short: Pattern Recogonition Lettters
+publication: Scientific Reports 
+publication_short: Scientific Reports 
 
-abstract: Optic neuropathy is kind of common eye diseases, which usually causes irreversible vision loss. Early diagnosis is key to saving patients’ vision. Due to the similar early clinical manifestations of common optic neuropathy, it may cause misdiagnosis and delays in treatment. Worse, most diagnoses rely on experienced doctors. In this paper, we proposed a novel deep learning architecture GroupFusionNet (GFN) to diagnose ﬁve normal optic neuropathy diseases, including Anterior Ischemic Optic Neuropathy (AION), papilledema, papillitis, Optic Disc Vasculitis (ODV), and optic atrophy (OA). Speciﬁcally, we combined multi-modalities in clinic examination such as fundus image, visual ﬁeld tests and age of each patient. GFN utilized two ResNet pathways to extract and fuse both features of fundus image and visual ﬁeld tests, and the information of structured data was embedded in the end. Experimental results demonstrate that multi-modality feature aggregation is effective for optic neuropathy diseases diagnosis, and GFN achieved a ﬁve-classes classiﬁcation accuracy of 87.82% on the test dataset.
-
+abstract: Objective To establish a comprehensive and accurate assessment model of periodontal alveolar bone loss based on panoramic images. Methods A total of 640 panoramic images were included, and 3 experienced periodontal physicians marked the key points needed to calculate the degree of periodontal alveolar bone loss and the speci c location and shape of the alveolar bone loss. A deep learning architecture based on UNet and YOLO-v4 was proposed to localize the tooth and key points, and the percentage and stageof periodontal alveolar bone loss were accurately calculated. The ability of the model to recognize these features was evaluated and compared with that of general dental practitioners. Results The overall classi cation accuracy of the model was 0.77, and the performance of the model varied for different tooth positions and categories; model classi cation was generally more accurate than that of general practitioners. Conclusion It is feasible to establish deep learning model forassessmentand staging radiographicperiodontal alveolar bone loss using two-stage architecture based on UNet and YOLO-v4.
 # Summary. An optional shortened abstract.
-summary: Multi-modality model for optic neuropathy diagnose.
+summary: Periodontal Bone Loss assessment.
 
 tags: ['medical imaging']
 
@@ -48,7 +47,7 @@ featured: false
 # - name: Custom Link
 #   url: http://example.org
 
-url_pdf: 'https://www.sciencedirect.com/science/article/pii/S0167865520304402'
+url_pdf: 'https://www.researchsquare.com/article/rs-885130/latest.pdf'
 url_code: ''
 url_dataset: ''
 url_poster: ''
