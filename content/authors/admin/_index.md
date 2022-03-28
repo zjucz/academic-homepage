@@ -70,9 +70,10 @@ email: "z.cao AT zju.edu.cn"
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
-Zheng Cao (曹政) is a Ph.D. candidate, majoring in computer science, Zhejiang University, under the supervision from Prof. Jian Wu. He is currently working as a research intern in Tencent Quantum Lab, cooperating with Prof. Tingjun Hou and Dr. Chang-Yu Hsieh. He is member of ZJU RealDoctor AI Research Centre and ZJU Innovative Drug Discovery Insitute. His research interests include AI for medical image analysis and AI for drug discovery.
+Zheng Cao (曹政) is a Ph.D. candidate, majoring in computer science, Zhejiang University, under the supervision from Prof. Jian Wu. He is currently working as a research intern in Tencent Quantum Lab, cooperating with Prof. Tingjun Hou and Dr. Chang-Yu Hsieh. He is member of ZJU RealDoctor AI Research Centre and ZJU Innovative Drug Discovery Insitute. His research interests include AI for medical image analysis and AI for drug discovery. 
+{{< icon name="eye" pack="fas" >}}Here is the [publications list](./publication/).
 
-<!-- {{< icon name="download" pack="fas" >}} Download --><!--  my {{< staticref "media/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}. -->
+<!-- {{< icon name="download" pack="fas" >}} Download my {{< staticref "media/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}. -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7Q0V5Y3KXJ"></script>

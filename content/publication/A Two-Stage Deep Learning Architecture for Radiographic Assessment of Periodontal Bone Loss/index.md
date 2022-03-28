@@ -30,8 +30,8 @@ publishDate: "2021-12-01T00:00:00Z"
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: Scientific Reports 
-publication_short: Scientific Reports 
+publication: BMC Oral Health
+publication_short: BMC Oral Health
 
 abstract: Objective To establish a comprehensive and accurate assessment model of periodontal alveolar bone loss based on panoramic images. Methods A total of 640 panoramic images were included, and 3 experienced periodontal physicians marked the key points needed to calculate the degree of periodontal alveolar bone loss and the speci c location and shape of the alveolar bone loss. A deep learning architecture based on UNet and YOLO-v4 was proposed to localize the tooth and key points, and the percentage and stageof periodontal alveolar bone loss were accurately calculated. The ability of the model to recognize these features was evaluated and compared with that of general dental practitioners. Results The overall classi cation accuracy of the model was 0.77, and the performance of the model varied for different tooth positions and categories; model classi cation was generally more accurate than that of general practitioners. Conclusion It is feasible to establish deep learning model forassessmentand staging radiographicperiodontal alveolar bone loss using two-stage architecture based on UNet and YOLO-v4.
 # Summary. An optional shortened abstract.
