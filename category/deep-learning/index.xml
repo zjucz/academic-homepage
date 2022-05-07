@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>deep learning | Z.Cao</title><link>www.caoz.top/category/deep-learning/</link><atom:link href="www.caoz.top/category/deep-learning/index.xml" rel="self" type="application/rss+xml"/><description>deep learning</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>浙ICP备2021027422号-1 Copyright@2022 Zheng Cao</copyright><lastBuildDate>Sat, 10 Apr 2021 00:00:00 +0000</lastBuildDate><image><url>/www.caoz.top/media/icon_hu11361c0288a87fbf93fc0f06f84edd26_64780_512x512_fill_lanczos_center_2.png</url><title>deep learning</title><link>www.caoz.top/category/deep-learning/</link></image><item><title>Training 2D nnUNet with personal dataset</title><link>www.caoz.top/post/training-2d-nnunet-with-personal-dataset/</link><pubDate>Sat, 10 Apr 2021 00:00:00 +0000</pubDate><guid>www.caoz.top/post/training-2d-nnunet-with-personal-dataset/</guid><description>&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>nnUNet (no-new-network-Unet) is proposed to offer a end-to-end training for image segmentation, and achieve state-of-the-art performance in over 10 medical image segmentation tasks, as introduced in paper &lt;a href="https://www.nature.com/articles/s41592-020-01008-z" target="_blank" rel="noopener">Automated Design of Deep Learning Methods for Biomedical Image Segmentation&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="./arch.png" alt="png">&lt;/p>
+&lt;p>Although uuUNet is easy to ulitize in 3D segmentation tasks, it&amp;rsquo;s difficult to train a personal dataset with 2d images. The preparation of dataset should follow strict guidelines.&lt;/p>
+&lt;h2 id="methods">Methods&lt;/h2>
+&lt;h4 id="step1-prepare-envs">Step1. Prepare Envs&lt;/h4>
+&lt;p>Create vitual environment in conda:&lt;/p>
+&lt;pre>&lt;code class="language-python">conda create -n nnunet python=3.8
+&lt;/code>&lt;/pre>
+&lt;p>Prepare datafloders.&lt;/p>
+&lt;pre>&lt;code>DATASET/nnUNet_raw_data/Task002_Heart
+├── nnUNet_preprocessed
+├── nnUNet_trained_models
+├── nnUNet_raw
+│ ├── nnUNet_croped_data
+│ ├── nnUNet_raw_data
+&lt;/code>&lt;/pre>
+&lt;h4 id="step2-covert-data">Step2. Covert Data&lt;/h4>
+&lt;p>Following guidance here.&lt;/p>
+&lt;blockquote>
+&lt;p>How to use 2D data with nnU-Net
+nnU-Net was originally built for 3D images. It is also strongestwhen applied to 3D segmentation problems because a large proportion of itsdesign choices were built with 3D in mind. Also note that many 2D segmentationproblems, especially in the non-biomedical domain, may benefit from pretrainednetwork architectures which nnU-Net does not support. Still, there is certainlya need for an out of the box segmentation solution for 2D segmentationproblems. And also on 2D segmentation tasks nnU-Net cam perform extremely well!We have, for example, won a 2D task in the cell tracking challenge with nnU-Net(see our Nature Methods paper) and we have also successfully applied nnU-Net tohistopathological segmentation problems. Working with 2D data in nnU-Netrequires a small workaround in the creation of the dataset. Essentially, allimages must be converted to pseudo 3D images (so an image with shape (X, Y)needs to be converted to an image with shape (1, X, Y). The resulting imagemust be saved in nifti format. Hereby it is important to set the spacing of thefirst axis (the one with shape 1) to a value larger than the others. If you areworking with niftis anyways, then doing this should be easy for you. Thisexample here is intended for demonstrating how nnU-Net can be used with’regular’ 2D images. We selected the massachusetts road segmentation datasetfor this because it can be obtained easily, it comes with a good amount oftraining cases but is still not too large to be difficult to handle.&lt;/p>
+&lt;/blockquote>
+&lt;p>Here is my converting code:&lt;/p>
+&lt;pre>&lt;code class="language-python">import numpy as np
+from batchgenerators.utilities.file_and_folder_operations import *
+from nnunet.dataset_conversion.utils import generate_dataset_json
+from nnunet.paths import nnUNet_raw_data, preprocessing_output_dir
+from nnunet.utilities.file_conversions import convert_2d_image_to_nifti
+imgs = '/data/caozheng/*'
+masks = '/data/caozheng/*'
+root = 'DATASET/imagesTr'
+label_root = 'DATASET/labelsTr'
+for i in os.listdir(imgs):
+img = os.path.join(imgs, i)
+convert_2d_image_to_nifti(img, os.path.join(root, i.split('.')[0]), is_seg=False)
+print('Finish：'+ i )
+for i in os.listdir(masks):
+mask = os.path.join(masks, i)
+convert_2d_image_to_nifti(mask, os.path.join(label_root, i.split('.')[0]), is_seg=True,
+transform=lambda x: (x &amp;gt; 0).astype(int))
+# transform=lambda x: (x &amp;gt; 0).astype(int) depends on label mode.
+print('Finish：'+ i )
+&lt;/code>&lt;/pre>
+&lt;p>Then generate dataset.json file, which can be mantually created or created by default code.&lt;/p>
+&lt;pre>&lt;code class="language-python">generate_dataset_json(os.path.join(raw, 'dataset.json'), os.path.join(raw, 'imagesTr'), os.path.join(raw, 'imagesTs'), ('background', 'caries'), {'background':0, 'caries':1}, 'caries_dataset', dataset_description='Private Test!', dataset_release='0.0.1')
+&lt;/code>&lt;/pre>
+&lt;h4 id="step3-move-data-to-suitable-position">Step3. Move Data to suitable position&lt;/h4>
+&lt;p>The data format of nnUnet is fixed. Task002_Heart is composed of Task ID data name, imagesTr is training data, imagesTs is test data, labelsTr is the label of training data, data sample la_003_0000.nii.gz is marked by case sample name modal.nii. It is composed of gz. Different modals are distinguished by 0000/0001/0002/0003. I set the new task ID to 100.&lt;/p>
+&lt;pre>&lt;code>DATASET/nnUNet_raw/nnUNet_raw_data/Task002_Heart
+├── dataset.json
+├── imagesTr
+│ ├── la_003_0000.nii.gz
+│ ├── la_004_0000.nii.gz
+│ ├── ...
+├── imagesTs
+│ ├── la_001_0000.nii.gz
+│ ├── la_002_0000.nii.gz
+│ ├── ...
+└── labelsTr
+├── la_003.nii.gz
+├── la_004.nii.gz
+├── ...
+&lt;/code>&lt;/pre>
+&lt;p>Our original 2-dimensional data is RGB three-channel, we can regard the RGB three-channel data as three modalities, extract the data of different channels separately, convert the shape to (1, width, height), and save it as 3 with SimpleITK Dimensional data.&lt;/p>
+&lt;h4 id="step4-install-packages">Step4. Install Packages&lt;/h4>
+&lt;p>Download nnunet code:&lt;/p>
+&lt;pre>&lt;code class="language-bash">conda activate nnunet
+&lt;/code>&lt;/pre>
+&lt;pre>&lt;code class="language-bash">git clone https://github.com/MIC-DKFZ/nnUNet.git
+&lt;/code>&lt;/pre>
+&lt;p>and install it.&lt;/p>
+&lt;pre>&lt;code class="language-bash">pip install -e .
+&lt;/code>&lt;/pre>
+&lt;p>Then set a environment variable&lt;/p>
+&lt;pre>&lt;code class="language-cpp">export nnUNet_raw_data_base=&amp;quot;/data/Project/nnUnet/Data/nnUNet_raw&amp;quot;
+export nnUNet_preprocessed=&amp;quot;/data/Project/nnUnet/Data/nnUNet_preprocessed&amp;quot;
+export RESULTS_FOLDER=&amp;quot;/data/Project/nnUnet/Data/nnUNet_trained_models&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;h4 id="step5-pre-process-and-training">Step5. Pre-process and Training&lt;/h4>
+&lt;p>Pre-process will create large amount of data.&lt;/p>
+&lt;pre>&lt;code class="language-bash">nnUNet_plan_and_preprocess -t 2
+&lt;/code>&lt;/pre>
+&lt;p>Here 2 is the task id, which is identified in folder &lt;em>DATASET/nnUNet_raw/nnUNet_raw_data/Task002_Heart&lt;/em>&lt;/p>
+&lt;p>Now it&amp;rsquo;s prepared for training! Here we use 5-fold traning, &amp;ndash;npz means create softmax prediction.&lt;/p>
+&lt;pre>&lt;code class="language-bash">CUDA_VISIBLE_DEVICES=6 nnUNet_train 2d nnUNetTrainerV2 Task002_Heart 0 --npz
+CUDA_VISIBLE_DEVICES=6 nnUNet_train 2d nnUNetTrainerV2 Task002_Heart 1 --npz
+CUDA_VISIBLE_DEVICES=6 nnUNet_train 2d nnUNetTrainerV2 Task002_Heart 2 --npz
+CUDA_VISIBLE_DEVICES=6 nnUNet_train 2d nnUNetTrainerV2 Task002_Heart 3 --npz
+CUDA_VISIBLE_DEVICES=6 nnUNet_train 2d nnUNetTrainerV2 Task002_Heart 4 --npz
+&lt;/code>&lt;/pre></description></item></channel></rss>
