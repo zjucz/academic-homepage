@@ -14,14 +14,17 @@ jobs:
           submodules: true 
           fetch-depth: 0 
 
-      - name: Setup Hugo
+      - name: Setup Hugo 🛎️
         uses: peaceiris/actions-hugo@v2	
         with:
-          hugo-version: 'latest'
-          # extended: true
+          hugo-version: '0.84.2'
+          extended: true
+          
+      - name: Build Hugo Academy ⚛️
+        run: hugo mod graph
 
-      - name: Build
-        run: hugo --minify
+      - name: Build 💮
+        run: hugo --gc --minify --cleanDestinationDir
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
