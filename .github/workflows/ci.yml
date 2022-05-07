@@ -1,8 +1,9 @@
-name: homepage deployed @ GitHub
+name: Build homepage
 on:
   push:
     branches:
-      - github-actions
+      - main
+      - master
 
 jobs:
   deploy:
