@@ -24,7 +24,7 @@ jobs:
         run: hugo mod graph
 
       - name: Build 💮
-        run: hugo --gc --minify --cleanDestinationDir
+        run: hugo --gc --minify -b https://zjucz.github.io/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

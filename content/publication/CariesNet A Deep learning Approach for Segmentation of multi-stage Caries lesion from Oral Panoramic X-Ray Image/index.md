@@ -41,7 +41,7 @@ summary: X-ray Segmentation of dental caries.
 tags: ['medical imaging']
 
 # Display this page in the Featured widget?
-featured: false
+featured: true
 
 # Custom links (uncomment lines below)
 # links:
